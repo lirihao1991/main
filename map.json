@@ -1,0 +1,39 @@
+{
+    "res": {
+        "eventproxy.js": {
+            "uri": "/eventproxy.js",
+            "type": "js",
+            "deps": [
+                "debug"
+            ]
+        },
+        "js2.js": {
+            "uri": "/js2.js",
+            "type": "js"
+        },
+        "main.css": {
+            "uri": "/main.css",
+            "type": "css"
+        },
+        "main.js": {
+            "uri": "/main.js",
+            "type": "js",
+            "deps": [
+                "main.css"
+            ]
+        },
+        "main.less": {
+            "uri": "/main.css",
+            "type": "css"
+        },
+        "zepto.js": {
+            "uri": "/zepto.js",
+            "type": "js"
+        },
+        "zepto.min.js": {
+            "uri": "/zepto.min.js",
+            "type": "js"
+        }
+    },
+    "pkg": {}
+}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>zepto</title>
+	<style>.delete { display: none; }</style>
+</head>
+<body>
+
+	<ul id="items">
+	<li>List item 1 <span class=delete>DELETE</span></li>
+	<li>List item 2 <span class=delete>DELETE</span></li>
+	</ul>
+
+	<script type="text/javascript" src="/zepto.min.js"></script>
+	<script>
+	$('#items li').swipe(function(){
+		$('.delete').hide()
+		$('.delete', this).show()
+	})
+
+	$('.delete').tap(function(){
+	$(this).parent('li').remove()
+	})
+	</script>
+</body>
+</html>
