@@ -1097,7 +1097,7 @@ body {
 	content: "";
 	width: 141px;
 	height: 171px;
-	background: url(/img/page4/line.png) no-repeat;
+	background: url(./img/page4/line.png) no-repeat;
 	/*background-size: 190px 171px*/
 }
 .dev-list .list-item:nth-child(1):before {
@@ -1597,7 +1597,7 @@ body {
 	width: 28px;
 	height: 28px;
 	width: 100%;
-	background: url(/img/up.png) 0 0 no-repeat;
+	background: url(./img/up.png) 0 0 no-repeat;
 	/*background: url(http://web.liveapp.cn/Public/img/xunits-icons.png,qt=1410302251.pagespeed.ic.c5ZDHH0Ezp.png) -33px 0;*/
 	/*background-size: 74px 28px;*/
 	position: absolute;
@@ -1619,6 +1619,7 @@ body {
 		-webkit-transform: translateY(12px);
 		opacity: 1;
 	}
+
 	100% {
 		-webkit-transform: translateY(0px);
 		opacity: 0;
@@ -2004,31 +2005,40 @@ body {
 	z-index: 999;
 }
 .app .pages {
-	display: none;
+	// display: none;
+	visibility: hidden;
 }
 .app .bg {
-	display: none;
+	// display: none;
+	visibility: hidden;
 }
 .app .u-guideTop {
-	display: none;
+	// display: none;
+	visibility: hidden;
 }
 .app .voice-cont {
-	display: none;
+	// display: none;
+	visibility: hidden;
 }
 .app.ready .app-loading {
-	display: none;
+	// display: none;
+	visibility: hidden;
 }
 .app.ready .voice-cont {
-	display: block;
+	// display: block;
+	visibility: visible;
 }
 .app.ready .bg {
-	display: block;
+	// display: block;
+	visibility: visible;
 }
 .app.ready .pages {
-	display: block;
+	// display: block;
+	visibility: visible;
 }
 .app.ready .u-guideTop {
-	display: block;
+	// display: block;
+	visibility: visible;
 }
 @-webkit-keyframes cloud {
 	from {
@@ -2164,7 +2174,7 @@ body {
 	width: 100%;
 	height: 9%;
 	position: absolute;
-	z-index: 9998;
+	z-index: 100;
 	top: 0;
 	.head {
 		background-color: #0079D1;
@@ -2404,9 +2414,9 @@ body {
 
 	.moveArea_c {
 		position: absolute; top:0px; 
-		width: 700px;
+		width: 400px;
 		// margin-right: 520px;
-		 height:100%;
+		height:100%;
 		overflow:hidden;
 		background:rgba(233,233,233,1);
 	}
@@ -2422,7 +2432,8 @@ body {
 		margin-top: 7%;
 		// -webkit-animation: rotate 2s ease;
 		// animation: rotate 2s ease;
-		-webkit-animation: blink 3s  infinite linear;
+		/* -webkit-animation: blink 3s  infinite linear; */
+		// z-index: 3;
 	}
 
 	.appouter {
@@ -2520,3 +2531,205 @@ body {
 		background: blue;
 	}
 }
+
+.page-5 {
+	.top {
+		color: #FFFFFF;
+		position: relative;
+		background: url("./img/page5/bg.png") 0 0 no-repeat;
+		.desc {
+			position: absolute;
+			h2 {
+				font-size: 18px;
+				line-height: 25px;
+				font-weight: normal;
+				margin-bottom: 10px;
+				img {
+					margin:0 8px;
+					width: 15px;
+					height: 15px;
+					z-index: 2;
+					-webkit-animation: rotation 1s infinite linear;
+					animation: rotation 1s infinite linear;
+				}
+			}
+			p {
+				font-size: 12px;
+				margin-bottom: 5px;
+			}
+
+		}
+	}
+	.bottom {
+		position: absolute;
+		left: 50%;
+		&>* {
+			height: 70px;
+			width: 70px;
+		}
+		img {
+			z-index: 2;
+
+		}
+		.appIcon1 {
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+		.appIcon3 {
+			position: absolute;
+			top: 0;
+			right: 0;
+		}
+		.appIcon7 {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+		}
+		.appIcon9 {
+			position: absolute;
+			bottom: 0;
+			right: 0;
+		}
+		.appIcon4 {
+			position: absolute;
+			left: 0;
+			top: 50%;
+		}
+		.appIcon6 {
+			position: absolute;
+			right: 0;
+			top: 50%;
+		}
+		.appIcon2 {
+			position: absolute;
+			top: 0;
+			left: 50%;
+		}
+		.appIcon8 {
+			position: absolute;
+			bottom: 0;
+			left: 50%;
+		}
+		.appIcon5 {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+		}
+	}
+}
+
+.page-6 {
+	.top {
+		img {
+			width: 100%;
+		}
+	}
+	.bottom {
+		.desc {
+			div {
+				// height: 30px;
+			}
+			p:nth-child(1) {
+				display: block;
+			}
+			p {
+				font-size: 15px;
+				margin-left: 34px;
+				display:inline-block;				
+			}
+			i{
+				position: absolute;
+				// margin-left: -2px;
+				margin-top: -5px;
+			}
+			img {
+				height: 30px;
+			}
+		}
+
+		/* &>img {
+			display: block;
+			position: absolute;
+			left: 50%;
+		} */
+	}
+}
+
+.app-footer img {
+	display: none;
+	
+}
+.forLook {
+	position: relative;
+	visibility: hidden;
+	display: block;
+}
+
+.page-3 .crossend
+{
+	position:absolute;
+	height:30%;
+	top:25%;
+	right:5%;
+
+}
+
+
+.page-3 .cross
+{
+	position:absolute;
+	height:30%;
+	top:25%;
+	right:5%;
+
+}
+
+.page-3 .cross_img
+{height:100%;
+	-webkit-transform: rotate(0deg); /* Safari and Chrome */
+	-webkit-transform-origin:50% 50%; /* Safari and Chrome */
+	-webkit-animation:huizhuan 0.5s;}
+
+	.cross_imgend
+	{height:100%;
+		-webkit-transform: rotate(45deg); /* Safari and Chrome */
+		-webkit-transform-origin:50% 50%; /* Safari and Chrome */
+		-webkit-animation:xuanzhuan 0.1s;}
+
+		.page-3 .app  img{height:100%}
+.page-3 .picture{
+height:80%;
+width:80%;
+background:red;
+position:fixed;
+margin-top:25%;margin-left:10%; 
+visibility:hidden;
+}
+ 
+.page-3 .picture_close{
+ height:7%;
+ position:fixed;
+ z-index:300;
+ visibility:hidden;
+}
+
+.page-3 .dwlink{
+ width:40%;
+ height:20%;
+ top:45%;
+ position:absolute;
+ }
+
+.page-3 .dwlink a
+{
+ display:block;
+ width:100%;
+ height:100%;
+ z-index:1000;
+}
+ 
+ 
+.page-3 .picture_close_img{height:100%}
+ 
+.page-3 .appshow_picture{height:100%;width:100%;z-index:500;}

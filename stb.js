@@ -1,6 +1,3 @@
-
-
-
 var i=0
 var imgarr=$('.li_inner_center');
 var outerdiv=$('.li_inner_top')

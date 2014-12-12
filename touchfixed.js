@@ -26,20 +26,29 @@ var appTouch = function(config, callback) {
 
 appTouch.prototype = {
  move : function(e) {
-
   var monitor = document.getElementById(this.touchContain), //监听容器
   target = document.getElementById(this.touchMove), //移动目标
   callbackfn = this.callbackfn, //回调函数
   appAreadir=[],//滑动区域字典
   flg = false, //标记是否滑动
   startX, //标记起始位置
+  startY,
   startLeft, //标记滑动起始时距离左边的位置
   move = 0,
   returnm=0, //回位标记
   clientwidth=document.body.offsetWidth,
   targetwidth=target.offsetWidth,
+  vir=0,
   rightmax=0-(target.offsetWidth-clientwidth);//移动距离
+   
+  var appmove = $('.moveArea_c')
   
+  for (var c=0;c<appmove.length;c++)
+
+  {
+	if(c)
+	{appmove[c].style.width=clientwidth+'px'}
+  }
  
   (function getByClass(sclass,tclass)  //定义参数（父节点，class名）
 	{
@@ -138,9 +147,11 @@ appTouch.prototype = {
    
 
    if (e.touches)
-   e = e.touches[0];
+   e = e.touches[0];	
+   
    startX = e.clientX;
    startLeft = target.style.left;
+ 
 
    /*惯性缓动*/
    lastMoveStart = startX;
@@ -156,7 +167,6 @@ appTouch.prototype = {
     if (e.touches)
      e = e.touches[0];
     move = e.clientX - startX;
-
 	/*非左端及右端*/
 	var delpx=startLeft.replace('px','');
 	target.style.left=move+parseInt(delpx)+'px';
@@ -294,23 +304,26 @@ appTouch.prototype = {
 			}
 		var x=setInterval(back2,1);
 		}
-
+		move=0;
    }
 	var soa=$('.appshow_outer')      //获取触摸对象
 	var sia=$('.appArea_c')		 //获取移动对象 
+	var sz=$('.cross_img')
+
 
 	var k=0;
 	flg2=true;
 	STime=0;
 	timera=0;
-	function se(wocao){//console.log(wocao.offsetTop)
+	function se(wocao)
+	{
 					var starttop=wocao.offsetTop+2;
-					var i=wocao.index;
-					
+					var i=wocao.index;					
 					var move1=sia[0].offsetHeight;
 					console.log("cl="+wocao.flg1)
 					if(!wocao.flg1)
 					{sia[i].style.top=starttop-wocao.offsetHeight+'px';	
+					 sz[i].className="cross_imgend";
 					function ret()
 						{
 					
@@ -344,6 +357,7 @@ appTouch.prototype = {
 					}
 						else
 						{
+						sz[i].className="cross_img";
 						function  ret1()
 						{
 					
@@ -398,13 +412,28 @@ appTouch.prototype = {
 		{	
 			for(var i=0;i<soa.length;i++)
 			{ 	
-				addEvent(soa[i], 'touchstart', start);
+				addEvent(soa[i],'touchstart',beigin)
+				addEvent(soa[i],'touchmove',read)
+				addEvent(soa[i], 'touchend', start);
 				soa[i].index=i;
 				soa[i].flg1=false;
 			}	
 		}	
 	)()
 	/*取消浏览器默认行为*/
+	
+	function beigin (e)
+	{startY=e.touches[0].clientY;}
+
+	function read(e)
+	{
+	  //alert(e.touches.length)
+	  //console.log(e)
+	vir=e.touches[0].clientY-startY;
+
+	  
+	}
+
 	function stop(e) {
 	//Opera/Chrome/FF
 		if (e.preventDefault)
@@ -413,9 +442,13 @@ appTouch.prototype = {
 		e.returnValue = false;
 	}
 	
-		function start(e)
+	function start(e)
 		{	
-		
+			//console.log(e)
+			 
+			
+			 if(vir==0)		
+			{
 			FTime = new Date().getTime();				
 			stop(e);
 			if(Math.abs(STime-FTime)>500){
@@ -430,14 +463,15 @@ appTouch.prototype = {
 					if (soa[supi].flg1&&supi!=index)
 						{	    console.log(supi+'=='+index)
 								//console.log("an="+supi+soa[supi].flg1	)
-							
-									
+								
 									sia[supi].style.top=0+'px';									
 									if(supi+1!=soa.length)
 									{
+										sia[supi].style.top=0+'px';	
 										soa[supi+1].style.marginTop=parseInt(soa[supi+1].style.marginTop.replace('px'))-move1-2+'px'
 										};
 									soa[supi].flg1=false;
+									sz[supi].className="cross_img";
 						}
 					
 					flg2=false;
@@ -448,8 +482,79 @@ appTouch.prototype = {
 					se(this)
 					
 					}
-
 				}
+					vir=0;
+				}
+		var app=$('.app_image');
+		var os=$('.overspread');
+		var sst=0;
+		var sapp=$('.picture');
+		var cl=$('.picture_close');
+		var app_p=$('.appshow_picture');
+
+
+		for (var q=0;q<app.length;q++)
+			{
+				/*touch.on(app[q],'tap',function(){
+					showstart()			
+				})*/
+				addEvent(app[q],'touchstart',showstart)
+				addEvent(app[q],'touchend',showend);
+				app[q].index=q;
+			}
+			
+		addEvent(os[0],'touchstart',close);
+		addEvent(cl[0],'touchstart',close);
+		
+		for (var p=0;p<app_p.length;p++)
+		{
+			addEvent(app_p[p],'touchstart',close);
+		}
+		
+		function show(th)
+		{	
+			var index=th.index;
+			var wh=document.body.clientHeight;
+			os[0].style.visibility="visible"
+			sapp[index].style.visibility="visible";
+			sapp[index].style.marginTop=wh*0.09+(wh*0.91-sapp[index].offsetHeight)/2+'px';
+			sapp[index].style.zIndex="200";
+			var t=sapp[index].offsetTop;
+			var l=sapp[index].offsetLeft;
+			cl[0].style.visibility="visible";
+			cl[0].style.marginLeft=l+sapp[index].offsetWidth-cl[0].offsetWidth/2+'px'
+			cl[0].style.marginTop=t-cl[0].offsetHeight/2+'px'
+			loc=index
+			;
+		}
+		
+		function close()
+		{	
+			os[0].style.visibility="hidden";
+			sapp[loc].style.visibility="hidden";
+			cl[0].style.visibility="hidden";
+		}
+		
+		
+		function showstart()
+		{
+			sst=(new Date().getTime());
+			
+		}
+		
+		function showend()
+		{  var endtime=new Date().getTime()
+			
+			var time=endtime-sst
+			// alert(time)
+			if((endtime-sst)<=200&&move==0)
+				{show(this);}
+		}
+		
+	
+		
+		
+		
 				}
 			
 			}

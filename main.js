@@ -1,5 +1,6 @@
 !function(a) {
     function b() {
+        
         l = 0,
             y = !1,//false
             k = "stay",
@@ -7,7 +8,8 @@
             n = a(window).width(),//页面的宽度
             o = a(window).height(),//页面的高度
             u = a("[data-animation]");//所有有动画效果的元素
-        var b = a(".pages .page").index(a(".page-game"));//返回-1 说明没有该元素
+        var b = a(".pages .page").index(a(".page-end"));//返回-1 说明没有该元素
+        dis = o*0.25;
         // console.log(b);
         for (var c = 0; m > c; c++) a(t[c]).attr("data-id", c + 1);//初始化，每个page都给一个ID
         s.addClass(v.direction).addClass(v.swipeAnim),
@@ -15,13 +17,26 @@
                 width: n + "px" //
             }),//让所有page的宽度等于页面的宽度
             a(t[l]).addClass("current"),//给当前页面加上current
-            v.onchange(l, t[l], k),
-            g()
+            v.onchange(l, t[l], k),// onchange函数只接受一个参数，但是却传送进去三个参数，第一个参数是页码，从0开始,t是page的集合,t[l]是当前页的dom元素
+            g()// g函数的功能是把页面中所有有动画效果的dom元素都去掉动画效果，然后给当前页增加动画效果
     }
 
     function c(a) {
         return y === !0 ? (event.preventDefault(), !1) : void(j = 1, x = !0, t.addClass("drag"), h = "horizontal" === v.direction ? a.pageX : a.pageY)
-    }
+        // h 是 按下是位置
+        /*if(y === !0) {
+            event.preventDefault(),!1 // ???
+        }else {
+            j = 1;
+            x = !0;
+            t.addClass("drap");
+            if(v.direction === "horizontal") {
+                h = a.pageX;
+            }else {
+                h = a.pageY;
+            }
+        }*/
+    }// TouchStart 触发 //神了 recode 的 代码 在页面里比较卡，原来的代码执行非常流畅
 
     function d(b) {
         return y === !0 || x === !1 ? (event.preventDefault(), !1) : (j = 2, event.preventDefault(), i = "horizontal" === v.direction ? b.pageX : b.pageY, 0 != l && l || !z || (window.stopDirec = 2), 1 == window.stopDirec && 0 > i - h ? void(j = 1) : 2 == window.stopDirec && i - h > 0 ? void(j = 1) : 3 == window.stopDirec ? void(j = 1) : (f(), w = i - h, 0 > w ? (p = a(0 === l ? t[m - 1] : t[l - 1]), r = a(l === m - 1 ? t[0] : t[l + 1])) : (p = a(0 === l ? t[m - 1] : t[l - 1]), r = a(l === m - 1 ? t[0] : t[l + 1])), q = a(t[l]), void(0 > w ? (r.addClass("mov"), r.css({
@@ -33,7 +48,7 @@
         }), q.css({
             "-webkit-transform": "translateY(" + w + "px)"
         })))))
-    }
+    }// onTouchMove
 
     function e(b) {
         if (y === !0 || 2 !== j);
@@ -41,13 +56,14 @@
             j = 3,
                 x = !1,
                 t.removeClass("drag"),// t 是当前有页面 去掉 .drap 类
-                i = "horizontal" === v.direction ? b.pageX : b.pageY,
-                w = i - h,
-                Math.abs(w) <= 50 && w > 0 ? (k = "stay", q.css({
+                i = "horizontal" === v.direction ? b.pageX : b.pageY,// i = 结束时触点的位置
+                w = i - h,// h 触点按下的位置 w = 滑动的距离
+                // k 应该是状态值 表示当前是否切换页面
+                Math.abs(w) <= dis && w > 0 ? (k = "stay", q.css({
                     "-webkit-transform": "translateY(0)"
                 }), p.css({
                     "-webkit-transform": "translateY(" + -o + "px)"
-                })) : Math.abs(w) <= 50 && 0 > w ? (k = "stay", q.css({
+                })) : Math.abs(w) <= dis && 0 > w ? (k = "stay", q.css({
                     "-webkit-transform": "translateY(0)"
                 }), r.css({
                     "-webkit-transform": "translateY(" + o + "px)"
@@ -59,27 +75,19 @@
                     "-webkit-transform": "translateY(" + -o + "px)"
                 }), r.css({
                     "-webkit-transform": "translateY(0)"
-                })),
+                })),// m 是 page的数量
                 l == m - 1 && (z = !1);
-            var c = a(".pages .page").index(a(".page-game"));
-            l != c || a(".game-success").hasClass("success-show") || (window.stopDirec = 1, a(".u-guideTop").hide()),
-                y = !0,
+            var c = a(".pages .page").index(a(".page-end"));// 获取最后一页的数值
+            l != c || (window.stopDirec = 1, a(".u-guideTop").hide()),// 如果是最后一页，window.stopDirec = 1 并且隐藏下面的小箭头
+                y = !0,// y = true
                 setTimeout(function() {
                         y = !1
                     },
-                    300)
+                    300)// 大约0.3秒之后，y = false
         }
     }
 
     function f() {
-        /*if ("horizontal" === v.direction) {
-            if(i >= h){
-                s.removeClass("forward").addClass("backward")
-            } else {
-
-            }
-        }*/
-
         "horizontal" === v.direction ? i >= h ? s.removeClass("forward").addClass("backward") : h > i && s.removeClass("backward").addClass("forward") : i >= h ? s.removeClass("forward").addClass("backward") : h > i && s.removeClass("backward").addClass("forward")
     }
 
@@ -87,10 +95,10 @@
         u.css({
                 "-webkit-animation": "none",
                 display: "none"
-            }),//所有有动画效果的元素，动画效果去掉，并不显示
+            }),//所有有动画效果的元素，动画效果去掉，并不显示 u = a("[data-animation]")
             a(".current [data-animation]").each(function(b, c) {//每个当前页面中的有动画效果的元素
                 var d = a(c),//取到这个元素
-                    e = d.attr("data-animation"),//取到这个元素的动画的内容  从行内取到
+                    e = d.attr("data-animation"),//取到这个元素的动画的名字  从行内取到
                     f = d.attr("data-duration") || 500,//取到这个动画的持续时间
                     g = d.attr("data-timing-function") || "ease",//取到这个动画速度变化的类型
                     h = d.attr("data-delay") ? d.attr("data-delay") : 0;//取到这个动画的延迟
@@ -105,6 +113,9 @@
                         "-webkit-animation-fill-mode": "both"
                     })//给当前这个元素加上动画
             })//给current页面中的所有元素加上动画 动画设置取自行内
+;a(t.get(3)).find('.content').css({
+                    '-webkit-transform':' matrix(1, 0, 0, 1, 0, 0)'
+                });
     }
     var h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w = 0,
         x = !1,
@@ -114,8 +125,8 @@
             return v = a.extend({},
                     a.fn.parallax.defaults, c),
                 this.each(function() {
-                    s = a(this),
-                        t = s.find(".page"),
+                    s = a(this),// this 是 pages
+                        t = s.find(".page"), // t 是 page 的 集合
                         b()
                 })
         },
@@ -131,22 +142,36 @@
         },
         a(document).on("touchstart", ".page",
             function(a) {
-                //console.log(a.changedTouches[0].target.className)
-            
-                if (a.changedTouches[0].target.className!='moveArea_c'&&a.changedTouches[0].target.className!='appArea_c'&&a.changedTouches[0].target.className!='app'&&a.changedTouches[0].target.className!='appouter'&&a.changedTouches[0].target.className!='app ready')
-                    {
-                    c(a.changedTouches[0])
-                    }
+                if (a.changedTouches[0].target.className!='moveArea_c'&&
+                    a.changedTouches[0].target.className!='appArea_c'&&
+                    a.changedTouches[0].target.className!='app'&&
+                    a.changedTouches[0].target.className!='appouter'&&
+                    a.changedTouches[0].target.className!='app ready'&&
+                    a.changedTouches[0].target.className!='app_image') {
+                    c(a.changedTouches[0])//起始
+                }
             }).on("touchmove", ".page",
             function(a) {
                 // console.log(a.changedTouches[0])
-                if (a.changedTouches[0].target.className!='moveArea_c'&&a.changedTouches[0].target.className!='appArea_c'&&a.changedTouches[0].target.className!='app'&&a.changedTouches[0].target.className!='appouter'&&a.changedTouches[0].target.className!='app ready')
-                {d(a.changedTouches[0])}
+                if (a.changedTouches[0].target.className!='moveArea_c'&&
+                    a.changedTouches[0].target.className!='appArea_c'&&
+                    a.changedTouches[0].target.className!='app'&&
+                    a.changedTouches[0].target.className!='appouter'&&
+                    a.changedTouches[0].target.className!='app ready'&&
+                    a.changedTouches[0].target.className!='app_image') {
+                    d(a.changedTouches[0])
+                }
             }).on("touchend", ".page",
             function(a) {
                 // console.log(a.changedTouches[0])
-                if (a.changedTouches[0].target.className!='moveArea_c'&&a.changedTouches[0].target.className!='appArea_c'&&a.changedTouches[0].target.className!='app'&&a.changedTouches[0].target.className!='appouter'&&a.changedTouches[0].target.className!='app ready')
-                {e(a.changedTouches[0])}
+                if (a.changedTouches[0].target.className!='moveArea_c'&&
+                    a.changedTouches[0].target.className!='appArea_c'&&
+                    a.changedTouches[0].target.className!='app'&&
+                    a.changedTouches[0].target.className!='appouter'&&
+                    a.changedTouches[0].target.className!='app ready'&&
+                    a.changedTouches[0].target.className!='app_image') {
+                    e(a.changedTouches[0])
+                }
             }).on("webkitAnimationEnd webkitTransitionEnd", ".pages",
             function() {
                 "stay" !== k && (setTimeout(function() {
@@ -163,12 +188,17 @@
                 (180 === window.orientation || 0 === window.orientation) && v.orientationchange("portrait"), (90 === window.orientation || -90 === window.orientation) && v.orientationchange("landscape")
             }, !1),
         window.slideTo = function(b) {
-            a(window).height();
             l = b,
-                k = "forward",
-                a(t.get(l)).css("-webkit-transform:translateY(0)"),
+                k = "backward",
+                a(t.get(l)).css({
+                    "-webkit-transform":"translateY(0)"
+                }),
                 a(t.removeClass("current").get(l)).addClass("current"),
+                a(t.get(3)).find('.content').css({
+                    '-webkit-transform':' matrix(1, 0, 0, 1, 0, 0)'
+                }),
                 g(),
+                window.stopDirec = 0, a(".u-guideTop").show(),
                 setTimeout(function() {
                         a(".pages").css({
                             "-webkit-transition-duration": "400ms",
@@ -184,25 +214,18 @@
                 "-webkit-transform": "matrix(1, 0, 0, 1, 0, -" + c * b + ")"
             })
         }
-}(Zepto), (window.jQuery || window.Zepto) && !
-function(a) {
-    a.fn.Swipe = function(b) {
-        return this.each(function() {
-            a(this).data("Swipe", new Swipe(a(this)[0], b))
-        })
-    }
-}(window.jQuery || window.Zepto), !
+}(Zepto),!
 function(a) {
     window.page = function() {
         function b(a, b) {
             e = a.pageY,//e 是 按下是 在 屏幕上的位置
-                j = b.height() + 50,
+                j = b.height() + 150,
                 g =b.css("-webkit-transform")?(b.css("-webkit-transform").replace("matrix(", "").replace(")", "").split(",")):[0,0,0,0,0,0],
                 g = parseInt(g[5]) || 0
         }//初始化
 
         function c(a, b) {
-            j = b.height() + 50,//b 是 当前 页面里 的 .content,j 这个页面高度 + 50
+            j = b.height() + 150,//b 是 当前 页面里 的 .content,j = 这个页面高度 + 50
                 h = i.css("-webkit-transform").replace("matrix(", "").replace(")", "").split(","),//null
                 h = Math.abs(parseInt(h[5]) || 0),// 0
                 d = a.pageY,//d 是 滑动结束的位置
@@ -215,11 +238,11 @@ function(a) {
                 loading: !1,
                 indicator: !1,
                 arrow: !1,
-                onchange: function(b) {
-                    (2 !== b || 3 !== b || 8 !== b) && a(".content").css("-webkit-transform", "none");
-                    var c = a(".pages .page").index(a(".page-game"));
-                    b != c || a(".game-success").hasClass("success-show") ? (window.stopDirec = 0, a(".u-guideTop").show()) : (window.stopDirec = 1, a(".u-guideTop").hide()),
-                        1 == a(".pages .page").size() && (window.stopDirec = 3)
+                onchange: function(b) { // 这里的b应该是当前页的意思，在其他地方传进来的参数l
+                   // (2 !== b || 3 !== b || 8 !== b) && a(".content").css("-webkit-transform", "none");//如果当前是2、3、8中的任何一个,就把页面中的所有的.content动画都去掉
+                    var c = a(".pages .page").index(a(".page-end"));//获得最后一页的数值
+                    b != c ? (window.stopDirec = 0, a(".u-guideTop").show()) : (window.stopDirec = 1, a(".u-guideTop").hide()),//如果不是最后一页，那么window.stopDirece = 0 并且 下面的小箭头显示，如果是最后一页，那么window.stopDirec = 1,下面小箭头不显示
+                        1 == a(".pages .page").size() && (window.stopDirec = 3);// 如果只有一页，window.stopDirec = 3
                 },
                 orientationchange: function() {}
             });
@@ -235,3 +258,93 @@ function(a) {
                 });
     }
 }(Zepto);
+(function($){
+    var shaLay,
+        height = $(window).height(),
+        width = $(window).width();
+    /*$('.app-footer >img').tap(function(e){
+        $(this).css({
+            'display':'none'
+        });
+        $(shaLay).css({
+            'visibility':'hidden'
+        })
+    });*/
+    touch.on('.app-footer >img','tap',function(){
+        $(this).css({
+            'display':'none'
+        });
+        $(shaLay).css({
+            'visibility':'hidden'
+        })
+    })
+    function wit(e){
+        var tar = e.target.localName;
+        if(tar === 'div') return null;
+        if(tar === 'img') {
+            return $(e.target).parent().parent()
+        } else {
+            return $(e.target).parent()
+        }
+    }
+
+    function shadow(){
+        /*$('.app-footer img').css({
+            'display':'none'
+        })*/
+        if(shaLay) {
+            $(shaLay).css({
+                'visibility': 'visible'
+            })
+        } else {
+            shaLay = $('<div></div>').addClass('shalay').css({
+                'position':'fixed',
+                'width':'100%',
+                'height':'100%',
+                'top':0,
+                'left':0,
+                'background-color':'black',
+                'opacity':0.7,
+                'z-index':100,
+                'visibility': 'visible'
+            }).appendTo('body');
+            /*$(shaLay).on('tap',function(e){
+                shadow();
+            })*/
+        }
+
+    }
+
+    function card(b) {
+        var b = $(b[0]).attr('class').substr(7)-1;
+        // console.log($('.page-5 .page-content').html())\
+        console.log()
+        $('.app-footer img').eq(b).css({
+            'position':'fixed',
+            'width':width*0.9,
+            'top':'50%',
+            'left':'50%',
+            'margin-top':-width*0.9/2,
+            'margin-left':-width*0.9/2,
+            'z-index':999,
+            'display':'block'
+        })
+    }
+    touch.on('.page-5 .bottom>div','tap',function(e){
+        var w = wit(e);
+        if(!w) return;
+        shadow();
+        // alert('tap')
+        card(wit(e));
+    }),
+    touch.on('.app-footer img','tap',function(){
+        $(this).css({
+             'display':'none'
+        })
+    }),
+    $(shaLay).on('tap',function(){
+        $(this).css({
+            'visibility':'visible'
+        })
+    })
+})(Zepto)
