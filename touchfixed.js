@@ -32,7 +32,6 @@ appTouch.prototype = {
   appAreadir=[],//滑动区域字典
   flg = false, //标记是否滑动
   startX, //标记起始位置
-  startY,
   startLeft, //标记滑动起始时距离左边的位置
   move = 0,
   returnm=0, //回位标记
@@ -44,7 +43,6 @@ appTouch.prototype = {
   var appmove = $('.moveArea_c')
   
   for (var c=0;c<appmove.length;c++)
-
   {
 	if(c)
 	{appmove[c].style.width=clientwidth+'px'}
@@ -147,11 +145,9 @@ appTouch.prototype = {
    
 
    if (e.touches)
-   e = e.touches[0];	
-   
+   e = e.touches[0];
    startX = e.clientX;
    startLeft = target.style.left;
- 
 
    /*惯性缓动*/
    lastMoveStart = startX;
@@ -167,6 +163,7 @@ appTouch.prototype = {
     if (e.touches)
      e = e.touches[0];
     move = e.clientX - startX;
+
 	/*非左端及右端*/
 	var delpx=startLeft.replace('px','');
 	target.style.left=move+parseInt(delpx)+'px';
@@ -193,9 +190,9 @@ appTouch.prototype = {
    stop(e);
    rightmax=0-(target.offsetWidth-clientwidth)
    if (e.touches)
-    e = e.touches[0];
-	flg = false;
-	target.flg=false;
+   e = e.touches[0];
+   flg = false;
+   target.flg=false;
 
 
 	/*惯性*/
@@ -304,25 +301,27 @@ appTouch.prototype = {
 			}
 		var x=setInterval(back2,1);
 		}
-		move=0;
+	move=0;
    }
 	var soa=$('.appshow_outer')      //获取触摸对象
 	var sia=$('.appArea_c')		 //获取移动对象 
 	var sz=$('.cross_img')
-
+    var aps=$('.appshow_inner')
+	
 
 	var k=0;
 	flg2=true;
 	STime=0;
 	timera=0;
-	function se(wocao)
-	{
-					var starttop=wocao.offsetTop+2;
+	function se(wocao){//console.log(wocao.offsetTop)
+					var starttop=wocao.offsetTop-(sia[0].offsetHeight-soa[0].offsetHeight)
 					var i=wocao.index;					
 					var move1=sia[0].offsetHeight;
-					console.log("cl="+wocao.flg1)
+					console.log("m="+move1)
+			
 					if(!wocao.flg1)
-					{sia[i].style.top=starttop-wocao.offsetHeight+'px';	
+					{sia[i].style.top=starttop-5+"px";
+					console.log("top="+sia[i].style.top)
 					 sz[i].className="cross_imgend";
 					function ret()
 						{
@@ -348,9 +347,11 @@ appTouch.prototype = {
 									flg2=false;
 								
 								
-								}
+								}								
 						}
 					var a=setInterval(ret,1);
+					if (i!=aps.length-1)
+					{aps[i+1].style.borderTop="1px solid #d3d3d3"; }
 					STime=FTime;
 				
 					sia[i].style.zIndex='1';
@@ -380,14 +381,16 @@ appTouch.prototype = {
 								    soa[i].flg1=false;
 									flg2=false;
 									sia[i].style.top=0+'px'
-								
+									if (i!=aps.length-1)
+									{aps[i+1].style.borderTop=" 1px solid #e9e9e9"}
 								
 								}
 						}
 					
 					var c=setInterval(ret1,1);
 					STime=FTime;
-				
+					if (i!=aps.length-1)
+					{aps[i+1].style.borderTop="1px solid #e9e9e9";}
 					sia[i].style.zIndex='1';
 					}
 	}
@@ -411,9 +414,8 @@ appTouch.prototype = {
 	(function()
 		{	
 			for(var i=0;i<soa.length;i++)
-			{ 	
-				addEvent(soa[i],'touchstart',beigin)
-				addEvent(soa[i],'touchmove',read)
+			{ 	addEvent(soa[i],'touchstart',begin);
+				addEvent(soa[i],'touchmove',read);
 				addEvent(soa[i], 'touchend', start);
 				soa[i].index=i;
 				soa[i].flg1=false;
@@ -421,19 +423,6 @@ appTouch.prototype = {
 		}	
 	)()
 	/*取消浏览器默认行为*/
-	
-	function beigin (e)
-	{startY=e.touches[0].clientY;}
-
-	function read(e)
-	{
-	  //alert(e.touches.length)
-	  //console.log(e)
-	vir=e.touches[0].clientY-startY;
-
-	  
-	}
-
 	function stop(e) {
 	//Opera/Chrome/FF
 		if (e.preventDefault)
@@ -442,17 +431,28 @@ appTouch.prototype = {
 		e.returnValue = false;
 	}
 	
-	function start(e)
+		function begin(e)
+		{
+			startY=e.touches[0].clientY;
+
+		}
+		
+		function read(e)
+		{
+			vir=e.touches[0].clientY-startY;
+			// console.log("v="+vir);
+		}
+	
+	
+		function start(e)
 		{	
-			//console.log(e)
-			 
 			
-			 if(vir==0)		
+			if(vir==0)
 			{
+		
 			FTime = new Date().getTime();				
 			stop(e);
-			if(Math.abs(STime-FTime)>500){
-			
+			if(Math.abs(STime-FTime)>500){	
 			
 			var move1=sia[0].offsetHeight;	
 			var index=this.index;	
@@ -468,22 +468,26 @@ appTouch.prototype = {
 									if(supi+1!=soa.length)
 									{
 										sia[supi].style.top=0+'px';	
-										soa[supi+1].style.marginTop=parseInt(soa[supi+1].style.marginTop.replace('px'))-move1-2+'px'
+										soa[supi+1].style.marginTop=parseInt(soa[supi+1].style.marginTop.replace('px'))-move1+'px'
 										};
+									if (supi!=aps.length-1)
+										{aps[supi+1].style.borderTop=" 1px solid #e9e9e9"}	
+		
 									soa[supi].flg1=false;
 									sz[supi].className="cross_img";
 						}
 					
 					flg2=false;
-						
-		
+						i
 					}
 					
 					se(this)
 					
 					}
+					
 				}
-					vir=0;
+				
+				vir=0;
 				}
 		var app=$('.app_image');
 		var os=$('.overspread');
@@ -495,10 +499,7 @@ appTouch.prototype = {
 
 		for (var q=0;q<app.length;q++)
 			{
-				/*touch.on(app[q],'tap',function(){
-					showstart()			
-				})*/
-				addEvent(app[q],'touchstart',showstart)
+				addEvent(app[q],'touchstart',showstart);
 				addEvent(app[q],'touchend',showend);
 				app[q].index=q;
 			}
@@ -536,19 +537,19 @@ appTouch.prototype = {
 		}
 		
 		
-		function showstart()
-		{
+		function showstart(e)
+		{	
+		
 			sst=(new Date().getTime());
-			
+			ssl= e.clientX;
 		}
 		
 		function showend()
 		{  var endtime=new Date().getTime()
-			
-			var time=endtime-sst
-			// alert(time)
-			if((endtime-sst)<=200&&move==0)
-				{show(this);}
+		   var time=(endtime-sst)
+		   
+			if(time<=1500&&move==0)
+			 {show(this);}
 		}
 		
 	
@@ -559,4 +560,37 @@ appTouch.prototype = {
 			
 			}
 
+function  reback()
+{
+	var soa=$('.appshow_outer') ;
+	var sia=$('.appArea_c')	
+	var move1=sia[0].offsetHeight;	
+     	 var aps=$('.appshow_inner')
+     	
 
+	
+	for(supi=0;supi<soa.length;supi++)
+					{
+					
+					if (soa[supi].flg1)
+						{	    
+								//console.log("an="+supi+soa[supi].flg1	)
+									 var sz=$('.cross_imgend')
+									sia[supi].style.top=0+'px';									
+									if(supi+1!=soa.length)
+									{
+										sia[supi].style.top=0+'px';	
+										soa[supi+1].style.marginTop=parseInt(soa[supi+1].style.marginTop.replace('px'))-move1+'px'
+										};
+									if (supi!=aps.length-1)
+									
+									{aps[supi+1].style.borderTop=" 1px solid #e9e9e9"}	
+									soa[supi].flg1=false;
+									sz[0].className="cross_img"
+									
+						}
+					//[0].className="cross_img"
+					flg2=false;
+
+} 
+}
