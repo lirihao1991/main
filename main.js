@@ -67,11 +67,11 @@
                     "-webkit-transform": "translateY(0)"
                 }), r.css({
                     "-webkit-transform": "translateY(" + o + "px)"
-                })) : w >= 0 ? (k = "backward", 0 === l ? l = m - 1 : l -= 1, q.css({
+                })) : w >= 0 ? (k = "backward",reback(), 0 === l ? l = m - 1 : l -= 1, q.css({
                     "-webkit-transform": "translateY(" + o + "px)"
                 }), p.css({
                     "-webkit-transform": "translateY(0)"
-                })) : 0 > w && (k = "forward", l === m - 1 ? l = 0 : l += 1, q.css({
+                })) : 0 > w && (k = "forward", reback(),l === m - 1 ? l = 0 : l += 1, q.css({
                     "-webkit-transform": "translateY(" + -o + "px)"
                 }), r.css({
                     "-webkit-transform": "translateY(0)"
@@ -83,7 +83,7 @@
                 setTimeout(function() {
                         y = !1
                     },
-                    300)// 大约0.3秒之后，y = false
+                    1000)// 大约0.3秒之后，y = false
         }
     }
 
@@ -308,11 +308,11 @@ function(a) {
                 'z-index':100,
                 'visibility': 'visible'
             }).appendTo('body');
+           
             /*$(shaLay).on('tap',function(e){
                 shadow();
             })*/
         }
-
     }
 
     function card(b) {
@@ -341,10 +341,13 @@ function(a) {
         $(this).css({
              'display':'none'
         })
-    }),
+    })
     $(shaLay).on('tap',function(){
         $(this).css({
-            'visibility':'visible'
+            'visibility':'hidden'
+        }),
+        $('.app-footer >img').css({
+            'display':'none'
         })
     })
 })(Zepto)
