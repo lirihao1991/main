@@ -287,38 +287,16 @@ function(a) {
             return $(e.target).parent()
         }
     }
-
+    var shalay = $('.shalay');
     function shadow(){
-        /*$('.app-footer img').css({
-            'display':'none'
-        })*/
-        if(shaLay) {
-            $(shaLay).css({
-                'visibility': 'visible'
-            })
-        } else {
-            shaLay = $('<div></div>').addClass('shalay').css({
-                'position':'fixed',
-                'width':'100%',
-                'height':'100%',
-                'top':0,
-                'left':0,
-                'background-color':'black',
-                'opacity':0.7,
-                'z-index':100,
-                'visibility': 'visible'
-            }).appendTo('body');
-           
-            /*$(shaLay).on('tap',function(e){
-                shadow();
-            })*/
-        }
+        // console.log(shalay[0].style)
+        shalay[0].style.visibility = 'visible';
     }
 
     function card(b) {
-        var b = $(b[0]).attr('class').substr(7)-1;
+        var b = $(b[0]).attr('class').substr(7);
         // console.log($('.page-5 .page-content').html())\
-        console.log()
+        console.log(b)
         $('.app-footer img').eq(b).css({
             'position':'fixed',
             'width':width*0.9,
@@ -340,9 +318,10 @@ function(a) {
     touch.on('.app-footer img','tap',function(){
         $(this).css({
              'display':'none'
-        })
+        });
+        shalay[0].style.visibility = 'visible';
     })
-    $(shaLay).on('tap',function(){
+    $(shalay).on('tap',function(){
         $(this).css({
             'visibility':'hidden'
         }),
