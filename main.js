@@ -264,14 +264,14 @@ function(a) {
         width = $(window).width(),
         sign = 0;
 
-    touch.on('.app-footer >img','tap',function(){
+    /*touch.on('.page-5-img','tap',function(){
         $(this).css({
             'display':'none'
         });
         $(shaLay).css({
             'visibility':'hidden'
         })
-    })
+    })*/
     function wit(e){
         var tar = e.target.localName;
         if(tar === 'div') return null;
@@ -281,7 +281,7 @@ function(a) {
             return $(e.target).parent()
         }
     }
-    var shalay = $('.shalay');
+    var shalay = $('.shalay_');
     function shadow(){
         // console.log(shalay[0].style)
         shalay[0].style.display = 'block';
@@ -293,8 +293,8 @@ function(a) {
         // alert(b)
         var test = $('.app-footer img').eq(b-1);
         // alert(test)
-        $('.app-footer img').eq(b-1).css({
-            'position':'fixed',
+        $('.page-5-img').eq(b-1).css({
+            'position':'absolute',
             'width':width*0.9,
             'top':'50%',
             'left':'50%',
@@ -313,6 +313,9 @@ function(a) {
         // alert('tap')
         card(wit(e));
         sign = 1;
+        $('.test').css({
+            'display':'block'
+        })
     }),
     /*$('.page-5 .bottom div').tap(function(){
         alert(sign)
@@ -324,7 +327,7 @@ function(a) {
         card(wit(e));
         sign = 1;
     })*/
-    touch.on('.app-footer img','tap',function(){
+    touch.on('.page-5-img','tap',function(){
         $(this).css({
              'display':'none'
         });
@@ -335,7 +338,7 @@ function(a) {
        $(this).css({
            'display':'none'
        }),
-       $('.app-footer >img').css({
+       $('.page-5-img').css({
            'display':'none'
        });
        sign = 0; 
