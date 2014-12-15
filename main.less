@@ -2263,7 +2263,7 @@ body {
 		}
 		.describe {
 			float: left;
-			margin-left: -12px;
+			// margin-left: -12px;
 		}
 
 		img {
@@ -2345,6 +2345,7 @@ body {
 			width: 60px;
 			margin: 0 10px;
 		}
+		z-index: auto;
 	}
 
 	.appshow {
@@ -2353,6 +2354,7 @@ body {
 		height:80%;
 		top:30%;
 		background:rgba(233,233,233,1);
+		z-index: auto;
 	}
 
 	.appshow_tittle {
@@ -2648,9 +2650,10 @@ body {
 	}
 }
 
-.app-footer img {
+.page-5-img {
 	display: none;
-	
+	opacity: 1;
+	z-index: 105px;
 }
 .forLook {
 	position: relative;
@@ -2731,12 +2734,13 @@ visibility:hidden;
 	width: 100%;
 	height: 100%;
 	opacity: 0.7;
-	z-index: 100;
 	background: black;
 	visibility: hidden;
+	z-index: 1;
+	// visibility: visible;
 }
 
-.shalay {
+.shalay_ {
 	position: fixed;
 	width: 100%;
 	height: 100%;
@@ -2745,5 +2749,11 @@ visibility:hidden;
 	background: black;
 	display: none;
 	// visibility: hidden;
+}
 
+.test {
+	// display: block;
+	height: 200px;
+	width: 200px;
+	z-index: 999;
 }
