@@ -261,15 +261,9 @@ function(a) {
 (function($){
     var shaLay,
         height = $(window).height(),
-        width = $(window).width();
-    /*$('.app-footer >img').tap(function(e){
-        $(this).css({
-            'display':'none'
-        });
-        $(shaLay).css({
-            'visibility':'hidden'
-        })
-    });*/
+        width = $(window).width(),
+        sign = 0;
+
     touch.on('.app-footer >img','tap',function(){
         $(this).css({
             'display':'none'
@@ -290,14 +284,16 @@ function(a) {
     var shalay = $('.shalay');
     function shadow(){
         // console.log(shalay[0].style)
-        shalay[0].style.visibility = 'visible';
+        shalay[0].style.display = 'block';
     }
 
     function card(b) {
         var b = $(b[0]).attr('class').substr(7);
         // console.log($('.page-5 .page-content').html())\
-        console.log(b)
-        $('.app-footer img').eq(b).css({
+        // alert(b)
+        var test = $('.app-footer img').eq(b-1);
+        // alert(test)
+        $('.app-footer img').eq(b-1).css({
             'position':'fixed',
             'width':width*0.9,
             'top':'50%',
@@ -308,25 +304,49 @@ function(a) {
             'display':'block'
         })
     }
-    touch.on('.page-5 .bottom>div','tap',function(e){
+    touch.on('.page-5 .bottom div','tap',function(e){
+        // alert(sign)
+        if(sign == 1) return;
         var w = wit(e);
         if(!w) return;
         shadow();
         // alert('tap')
         card(wit(e));
+        sign = 1;
     }),
+    /*$('.page-5 .bottom div').tap(function(){
+        alert(sign)
+        if(sign == 1) return;
+        var w = wit(e);
+        if(!w) return;
+        shadow();
+        // alert('tap')
+        card(wit(e));
+        sign = 1;
+    })*/
     touch.on('.app-footer img','tap',function(){
         $(this).css({
              'display':'none'
         });
-        shalay[0].style.visibility = 'visible';
+        shalay[0].style.display = 'none';
+        sign = 0;
     })
-    $(shalay).on('tap',function(){
+    touch.on('.shalay','tap',function(){
+       $(this).css({
+           'display':'none'
+       }),
+       $('.app-footer >img').css({
+           'display':'none'
+       });
+       sign = 0; 
+    })
+    /*$(shalay).on('tap',function(){
         $(this).css({
-            'visibility':'hidden'
+            'display':'none'
         }),
         $('.app-footer >img').css({
             'display':'none'
-        })
-    })
+        });
+        sign = 0;
+    })*/
 })(Zepto)
