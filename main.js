@@ -264,14 +264,6 @@ function(a) {
         width = $(window).width(),
         sign = 0;
 
-    /*touch.on('.page-5-img','tap',function(){
-        $(this).css({
-            'display':'none'
-        });
-        $(shaLay).css({
-            'visibility':'hidden'
-        })
-    })*/
     function wit(e){
         var tar = e.target.localName;
         if(tar === 'div') return null;
@@ -288,11 +280,12 @@ function(a) {
 
     function card(b) {
         var b = $(b[0]).attr('class').substr(7);
-        // console.log($('.page-5 .page-content').html())\
         // alert(b)
         var test = $('.app-footer img').eq(b-1);
         // alert(test)
-        $('.page-5-img').eq(b-1).css({
+        var img = $('.page-5-img');
+        var nowImg = img.eq(b-1);
+        nowImg.attr('src',nowImg.data('src')).css({
             'position':'absolute',
             'width':width*0.9,
             'top':'50%',
@@ -308,8 +301,6 @@ function(a) {
         var w = wit(e);
         if(!w) return;
         shadow();
-        // console.log(sign)
-        // alert('tap')
         card(w);
         sign = 1;
         $('.test').css({
