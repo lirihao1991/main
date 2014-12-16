@@ -273,16 +273,13 @@ function(a) {
             return $(e.target).parent()
         }
     }
-    var shalay = $('.shalay');
+    var shalay = $('.shalay_');
     function shadow(){
         shalay[0].style.display = 'block';
     }
 
     function card(b) {
         var b = $(b[0]).attr('class').substr(7);
-        // alert(b)
-        var test = $('.app-footer img').eq(b-1);
-        // alert(test)
         var img = $('.page-5-img');
         var nowImg = img.eq(b-1);
         nowImg.attr('src',nowImg.data('src')).css({
@@ -303,9 +300,6 @@ function(a) {
         shadow();
         card(w);
         sign = 1;
-        $('.test').css({
-            'display':'block'
-        })
     }),
     touch.on('.page-5-img','tap',function(){
         $(this).css({
