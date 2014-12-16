@@ -490,7 +490,7 @@ appTouch.prototype = {
 				vir=0;
 				}
 		var app=$('.app_image');
-		var os=$('.overspread');
+		var os=$('.shalay');
 		var sst=0;
 		var sapp=$('.picture');
 		var cl=$('.picture_close');
@@ -519,7 +519,7 @@ appTouch.prototype = {
 			// console.log(index)
 			var wh=document.body.clientHeight;
 			app_p[index].src=adr+index+".jpg"
-			os[0].style.visibility="visible"
+			os[0].style.display="block";
 			sapp[index].style.visibility="visible";
 			sapp[index].style.marginTop=wh*0.09+(wh*0.91-sapp[index].offsetHeight)/2+'px';
 			sapp[index].style.zIndex="200";
@@ -534,7 +534,7 @@ appTouch.prototype = {
 		
 		function close()
 		{	
-			os[0].style.visibility="hidden";
+			os[0].style.display="none";
 			sapp[loc].style.visibility="hidden";
 			cl[0].style.visibility="hidden";
 		}

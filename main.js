@@ -302,7 +302,7 @@ function(a) {
         sign = 1;
     }),
     touch.on('.page-5-img','tap',function(){
-        $(this).css({
+        $('.page-5-img').css({
              'display':'none'
         });
         shalay[0].style.display = 'none';
@@ -317,4 +317,13 @@ function(a) {
        });
        sign = 0; 
     })
+     window.onresize = function(){
+        $('.shalay').css({
+           'display':'none'
+       }),
+       $('.page-5-img').css({
+           'display':'none'
+       });
+       sign = 0;  
+     }
 })(Zepto)
