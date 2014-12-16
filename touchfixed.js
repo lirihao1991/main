@@ -452,7 +452,7 @@ appTouch.prototype = {
 			
 			FTime = new Date().getTime();				
 			stop(e);
-			if(Math.abs(STime-FTime)>1500){	
+			if(Math.abs(STime-FTime)>800){	
 			
 			var move1=sia[0].offsetHeight;	
 			var index=this.index;	
