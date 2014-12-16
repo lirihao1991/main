@@ -308,8 +308,8 @@ function(a) {
         shalay[0].style.display = 'none';
         sign = 0;
     })
-    touch.on('.shalay','tap',function(){
-       $(this).css({
+    touch.on('.shalay_','tap',function(){
+       $('.shalay_').css({
            'display':'none'
        }),
        $('.page-5-img').css({
