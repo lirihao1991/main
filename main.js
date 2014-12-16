@@ -264,14 +264,6 @@ function(a) {
         width = $(window).width(),
         sign = 0;
 
-    /*touch.on('.page-5-img','tap',function(){
-        $(this).css({
-            'display':'none'
-        });
-        $(shaLay).css({
-            'visibility':'hidden'
-        })
-    })*/
     function wit(e){
         var tar = e.target.localName;
         if(tar === 'div') return null;
@@ -281,19 +273,19 @@ function(a) {
             return $(e.target).parent()
         }
     }
-    var shalay = $('.shalay_');
+    var shalay = $('.shalay');
     function shadow(){
-        // console.log(shalay[0].style)
         shalay[0].style.display = 'block';
     }
 
     function card(b) {
         var b = $(b[0]).attr('class').substr(7);
-        // console.log($('.page-5 .page-content').html())\
         // alert(b)
         var test = $('.app-footer img').eq(b-1);
         // alert(test)
-        $('.page-5-img').eq(b-1).css({
+        var img = $('.page-5-img');
+        var nowImg = img.eq(b-1);
+        nowImg.attr('src',nowImg.data('src')).css({
             'position':'absolute',
             'width':width*0.9,
             'top':'50%',
@@ -305,28 +297,16 @@ function(a) {
         })
     }
     touch.on('.page-5 .bottom div','tap',function(e){
-        // alert(sign)
         if(sign == 1) return;
         var w = wit(e);
         if(!w) return;
         shadow();
-        // alert('tap')
-        card(wit(e));
+        card(w);
         sign = 1;
         $('.test').css({
             'display':'block'
         })
     }),
-    /*$('.page-5 .bottom div').tap(function(){
-        alert(sign)
-        if(sign == 1) return;
-        var w = wit(e);
-        if(!w) return;
-        shadow();
-        // alert('tap')
-        card(wit(e));
-        sign = 1;
-    })*/
     touch.on('.page-5-img','tap',function(){
         $(this).css({
              'display':'none'
@@ -343,13 +323,4 @@ function(a) {
        });
        sign = 0; 
     })
-    /*$(shalay).on('tap',function(){
-        $(this).css({
-            'display':'none'
-        }),
-        $('.app-footer >img').css({
-            'display':'none'
-        });
-        sign = 0;
-    })*/
 })(Zepto)

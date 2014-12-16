@@ -449,7 +449,7 @@ appTouch.prototype = {
 			
 			if(vir==0)
 			{
-		
+			
 			FTime = new Date().getTime();				
 			stop(e);
 			if(Math.abs(STime-FTime)>500){	
@@ -495,6 +495,7 @@ appTouch.prototype = {
 		var sapp=$('.picture');
 		var cl=$('.picture_close');
 		var app_p=$('.appshow_picture');
+		var adr="./img/appshow/"
 
 
 		for (var q=0;q<app.length;q++)
@@ -515,7 +516,9 @@ appTouch.prototype = {
 		function show(th)
 		{	
 			var index=th.index;
+			console.log(index)
 			var wh=document.body.clientHeight;
+			app_p[index].src=adr+index+".jpg"
 			os[0].style.visibility="visible"
 			sapp[index].style.visibility="visible";
 			sapp[index].style.marginTop=wh*0.09+(wh*0.91-sapp[index].offsetHeight)/2+'px';

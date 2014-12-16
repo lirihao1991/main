@@ -2530,7 +2530,7 @@ body {
 	.top {
 		color: #FFFFFF;
 		position: relative;
-		background: url("./img/page5/bg.png") 0 0 no-repeat;
+		background: url("./img/page5/bg.jpg") 0 0 no-repeat;
 		.desc {
 			position: absolute;
 			h2 {
@@ -2684,13 +2684,13 @@ body {
 {height:100%;
 	-webkit-transform: rotate(0deg); /* Safari and Chrome */
 	-webkit-transform-origin:50% 50%; /* Safari and Chrome */
-	-webkit-animation:huizhuan 0.5s;}
+	-webkit-animation:huizhuan 1s;}
 
 	.cross_imgend
 	{height:100%;
 		-webkit-transform: rotate(45deg); /* Safari and Chrome */
 		-webkit-transform-origin:50% 50%; /* Safari and Chrome */
-		-webkit-animation:xuanzhuan 0.5s;}
+		-webkit-animation:xuanzhuan 1s;}
 
 		.page-3 .app  img{height:100%}
 .page-3 .picture{
@@ -2750,10 +2750,42 @@ visibility:hidden;
 	display: none;
 	// visibility: hidden;
 }
+<<<<<<< HEAD
 
 .test {
 	// display: block;
 	height: 200px;
 	width: 200px;
 	z-index: 999;
+=======
+
+.page-5-img {
+	display: none;
+}
+
+
+.img-loading {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	-webkit-box-orient: horizontal;
+	-webkit-box-pack: center;
+	-webkit-box-align: center;
+	display: -webkit-box;
+	z-index: 999;
+}
+
+@-webkit-keyframes xuanzhuan
+{
+from{-webkit-transform:rotate(0deg);}
+to {-webkit-transform:rotate(45deg);}
+}
+
+@-webkit-keyframes huizhuan
+{
+from{-webkit-transform:rotate(45deg);}
+to{-webkit-transform:rotate(0deg);}
+>>>>>>> ajax
 }
