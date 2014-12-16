@@ -273,7 +273,7 @@ function(a) {
             return $(e.target).parent()
         }
     }
-    var shalay = $('.shalay_');
+    var shalay = $('.shalay');
     function shadow(){
         shalay[0].style.display = 'block';
     }
@@ -308,8 +308,8 @@ function(a) {
         shalay[0].style.display = 'none';
         sign = 0;
     })
-    touch.on('.shalay_','tap',function(){
-       $('.shalay_').css({
+    touch.on('.shalay','tap',function(){
+       $('.shalay').css({
            'display':'none'
        }),
        $('.page-5-img').css({
