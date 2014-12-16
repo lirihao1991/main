@@ -317,11 +317,11 @@ appTouch.prototype = {
 					var starttop=wocao.offsetTop-(sia[0].offsetHeight-soa[0].offsetHeight)
 					var i=wocao.index;					
 					var move1=sia[0].offsetHeight;
-					console.log("m="+move1)
+					// console.log("m="+move1)
 			
 					if(!wocao.flg1)
 					{sia[i].style.top=starttop-5+"px";
-					console.log("top="+sia[i].style.top)
+					// console.log("top="+sia[i].style.top)
 					 sz[i].className="cross_imgend";
 					function ret()
 						{
@@ -516,7 +516,7 @@ appTouch.prototype = {
 		function show(th)
 		{	
 			var index=th.index;
-			console.log(index)
+			// console.log(index)
 			var wh=document.body.clientHeight;
 			app_p[index].src=adr+index+".jpg"
 			os[0].style.visibility="visible"
