@@ -1,7 +1,7 @@
 fis.config.set('modules.parser.less', 'less');
 fis.config.set('roadmap.ext.less', 'css');
-//fis.config.set('modules.postpackager', 'simple');
-/*
+fis.config.set('modules.postpackager', 'simple');
+
 fis.config.set('pack', {
     'all.js': [
         '/zepto.js',
@@ -11,4 +11,4 @@ fis.config.set('pack', {
         '/touchfixed.js',
         '/stb.js'
     ]
-});*/
+});

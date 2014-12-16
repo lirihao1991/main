@@ -144,9 +144,9 @@
             function(a) {
                 if (a.changedTouches[0].target.className!='moveArea_c'&&
                     a.changedTouches[0].target.className!='appArea_c'&&
-                    a.changedTouches[0].target.className!='app'&&
-                    a.changedTouches[0].target.className!='appouter'&&
-                    a.changedTouches[0].target.className!='app ready'&&
+                //     a.changedTouches[0].target.className!='app'&&
+                //     a.changedTouches[0].target.className!='appouter'&&
+                //     a.changedTouches[0].target.className!='app ready'&&
                     a.changedTouches[0].target.className!='app_image') {
                     c(a.changedTouches[0])//起始
                 }
@@ -155,9 +155,9 @@
                 // console.log(a.changedTouches[0])
                 if (a.changedTouches[0].target.className!='moveArea_c'&&
                     a.changedTouches[0].target.className!='appArea_c'&&
-                    a.changedTouches[0].target.className!='app'&&
-                    a.changedTouches[0].target.className!='appouter'&&
-                    a.changedTouches[0].target.className!='app ready'&&
+                //     a.changedTouches[0].target.className!='app'&&
+                //     a.changedTouches[0].target.className!='appouter'&&
+                //     a.changedTouches[0].target.className!='app ready'&&
                     a.changedTouches[0].target.className!='app_image') {
                     d(a.changedTouches[0])
                 }
@@ -167,8 +167,8 @@
                 if (a.changedTouches[0].target.className!='moveArea_c'&&
                     a.changedTouches[0].target.className!='appArea_c'&&
                     a.changedTouches[0].target.className!='app'&&
-                    a.changedTouches[0].target.className!='appouter'&&
-                    a.changedTouches[0].target.className!='app ready'&&
+                //     a.changedTouches[0].target.className!='appouter'&&
+                //     a.changedTouches[0].target.className!='app ready'&&
                     a.changedTouches[0].target.className!='app_image') {
                     e(a.changedTouches[0])
                 }
@@ -302,28 +302,28 @@ function(a) {
         sign = 1;
     }),
     touch.on('.page-5-img','tap',function(){
+        sign = 0;
         $('.page-5-img').css({
              'display':'none'
         });
         shalay[0].style.display = 'none';
-        sign = 0;
     })
     touch.on('.shalay','tap',function(){
+       sign = 0; 
        $('.shalay').css({
            'display':'none'
        }),
        $('.page-5-img').css({
            'display':'none'
        });
-       sign = 0; 
     })
      window.onresize = function(){
+       sign = 0;  
         $('.shalay').css({
            'display':'none'
        }),
        $('.page-5-img').css({
            'display':'none'
        });
-       sign = 0;  
      }
 })(Zepto)
