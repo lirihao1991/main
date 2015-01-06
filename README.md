@@ -5,3 +5,8 @@
 
 目前处于： 压缩分支 
 ---
+目前部署在test-405f7.coding.io
+
+二维码
+
+[![二维码](/qrcode.png)](http://test-405f7.coding.io)
